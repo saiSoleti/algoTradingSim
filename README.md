@@ -1,1 +1,7 @@
-# algoTradingSim
+Day 1 — Market Data Pipeline & Visualization
+
+On Day 1, I built the foundation of the algorithmic trading simulator by setting up a structured Python project and a reliable market data pipeline. Using the yfinance API, I downloaded historical OHLCV data for user-selected stocks, ETFs, and cryptocurrencies, handled data-format edge cases, and cached results locally for efficiency. I explored and visualized closing prices using Pandas and Matplotlib, learning why closing prices are central to market analysis and how trends and volatility appear in real financial time-series data.
+
+Day 2 — Indicators, Signals & Backtesting Engine
+
+On Day 2, I extended the project from data exploration into a functioning trading simulation. I implemented technical indicators (20-day and 50-day simple moving averages) and transformed them into a trend-following trading signal that determines when the strategy is invested or in cash. I then built a custom long-only backtesting engine that simulates buy and sell decisions at daily closing prices, tracks portfolio equity over time, logs trades, and computes key performance metrics such as total return and maximum drawdown. This day focused on understanding how market signals become real trades and how portfolio value evolves through time.

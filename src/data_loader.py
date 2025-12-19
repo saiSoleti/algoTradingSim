@@ -1,8 +1,7 @@
-# src/data_loader.py
 from __future__ import annotations
-
 import pandas as pd
 import yfinance as yf
+
 
 def fetch_ohlcv(ticker: str, start: str, end: str, interval: str = "1d") -> pd.DataFrame:
     df = yf.download(
@@ -18,7 +17,7 @@ def fetch_ohlcv(ticker: str, start: str, end: str, interval: str = "1d") -> pd.D
     if df is None or df.empty:
         raise ValueError(f"No data returned for {ticker}. Check symbol/date range.")
 
-    # ✅ FIX: Flatten MultiIndex columns (e.g., ('Close','SPY') -> 'Close')
+    # Flatten MultiIndex columns if present
     if isinstance(df.columns, pd.MultiIndex):
         df.columns = df.columns.get_level_values(0)
 
@@ -30,7 +29,7 @@ def fetch_ohlcv(ticker: str, start: str, end: str, interval: str = "1d") -> pd.D
 
     df.index = pd.to_datetime(df.index)
 
-    # ✅ Extra safety: ensure Close is 1-D Series (not a 1-col DataFrame)
+    # Ensure Close is 1-D
     if isinstance(df["Close"], pd.DataFrame):
         df["Close"] = df["Close"].iloc[:, 0]
 

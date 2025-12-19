@@ -1,7 +1,69 @@
-Day 1 — Market Data Pipeline & Visualization
+Algorithmic Trading Simulator (Stocks & Options)
 
-On Day 1, I built the foundation of the algorithmic trading simulator by setting up a structured Python project and a reliable market data pipeline. Using the yfinance API, I downloaded historical OHLCV data for user-selected stocks, ETFs, and cryptocurrencies, handled data-format edge cases, and cached results locally for efficiency. I explored and visualized closing prices using Pandas and Matplotlib, learning why closing prices are central to market analysis and how trends and volatility appear in real financial time-series data.
+A modular Python-based trading simulator built to explore signal-based strategies, execution mechanics, and risk expression across instruments (stocks vs options).
 
-Day 2 — Indicators, Signals & Backtesting Engine
+The project emphasizes understanding market behavior over curve-fitting.
 
-On Day 2, I extended the project from data exploration into a functioning trading simulation. I implemented technical indicators (20-day and 50-day simple moving averages) and transformed them into a trend-following trading signal that determines when the strategy is invested or in cash. I then built a custom long-only backtesting engine that simulates buy and sell decisions at daily closing prices, tracks portfolio equity over time, logs trades, and computes key performance metrics such as total return and maximum drawdown. This day focused on understanding how market signals become real trades and how portfolio value evolves through time.
+Features:
+    Historical OHLCV data via yfinance
+    SMA crossover strategies (configurable fast/slow)
+    Long-only, short-only, and long+short stock trading
+    Event-driven backtesting with fees and slippage
+    Options strategies (educational):
+    Long Calls (convex upside)
+    Protective Puts (downside insurance)
+    Black–Scholes pricing using realized volatility proxy
+    Performance metrics: CAGR, max drawdown, Sharpe
+    Equity curve visualization vs buy-and-hold
+    Architecture
+    Data → Indicators → Signals → Trades → Equity → Metrics → Plots
+
+
+Key idea:
+
+Signals create intent.
+Execution adds realism.
+Instruments reshape risk.
+
+Project Structure
+algoTradingSim/
+├── main.py
+└── src/
+    ├── data_loader.py
+    ├── indicators.py
+    ├── strategies.py
+    ├── backtester.py
+    ├── options.py
+    ├── metrics.py
+    └── plot.py
+
+How to Run
+Interactive (recommended)
+python main.py
+
+
+You’ll choose:
+
+Instrument (stock / options)
+
+Position type (long / short / both)
+
+Ticker(s)
+
+(Options) contract parameters
+
+CLI
+python main.py --ticker QQQ --mode stock
+python main.py --ticker TSLA --mode long_call
+
+Market Insights:
+    Trend-following works best in strong markets (e.g. QQQ)
+    Choppy markets increase trade count and drawdowns
+    Options do not improve signals — they change payoff shape
+    Protective puts reduce drawdowns at the cost of returns
+
+Limitations:
+    Uses realized volatility as IV proxy
+    No bid–ask spreads or liquidity modeling
+    European options only
+    No margin or assignment risk
